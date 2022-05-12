@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-import { View } from 'react-native';
+import { View, KeyboardAvoidingView, Platform } from 'react-native';
 import { theme } from './src/theme';
 import Widget from './src/components/Widget';
 
@@ -26,21 +26,24 @@ export default function App() {
   SplashScreen.hideAsync();
 
   return (
-    <View style={{
-      flex: 1,
-      backgroundColor: theme.colors.background
-    }}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+    >
+      <View style={{
+        flex: 1,
+        backgroundColor: theme.colors.background
+      }}>
 
-      <StatusBar
-        style="light"
-        backgroundColor="transparent"
-        translucent
-      
-      />
+        <StatusBar
+          style="light"
+          backgroundColor="transparent"
+          translucent 
+        />
 
-      <Widget />
- 
-      
-    </View>
+        <Widget />
+   
+      </View> 
+    </KeyboardAvoidingView>
   );
 }
